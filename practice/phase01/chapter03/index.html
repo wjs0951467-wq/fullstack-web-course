@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 한글이 깨지지 않도록 문자 인코딩을 설정한다. -->
+    <meta charset="UTF-8">
+
+    <!-- 모바일 화면 너비에 맞춰 페이지를 표시한다. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 브라우저 탭에 표시할 제목이다. -->
+    <title>Member Management</title>
+</head>
+<body>
+    <!-- 페이지의 대표 제목과 탐색 링크를 담는다. -->
+    <header>
+        <h1>Member Management</h1>
+
+        <nav>
+            <!-- 수업 저장소를 새 탭에서 연다. -->
+            <a href="https://github.com/GilbertMoon/fullstack-web-course"
+               target="_blank"
+               rel="noopener">
+                Course GitHub
+            </a>
+        </nav>
+    </header>
+
+    <!-- 페이지의 핵심 콘텐츠를 담는다. -->
+    <main>
+        <!-- 회원 사진과 회원 목록을 함께 보여주는 영역이다. -->
+        <section>
+            <h2>회원 목록</h2>
+
+            <!-- 현재 HTML 파일 옆의 images 폴더에서 사진을 불러온다. -->
+            <img
+                src="./images/profile (1).png"
+                alt="데이식스 단체 사진"
+                width="128"
+                height="128"
+            >
+
+            <!-- 회원 정보를 행과 열로 표시한다. -->
+            <table>
+                <!-- 각 열의 제목을 담는다. -->
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">이메일</th>
+                        <th scope="col">나이</th>
+                    </tr>
+                </thead>
+
+                <!-- 한 명의 회원 정보를 하나의 행에 담는다. -->
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>박성진</td>
+                        <td>sungjin@example.com</td>
+                        <td>34</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>강영현</td>
+                        <td>youngk@example.com</td>
+                        <td>34</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>김원필</td>
+                        <td>wonpil@example.com</td>
+                        <td>33</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>윤도운</td>
+                        <td>dowoon@example.com</td>
+                        <td>32</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 회원 정보를 입력받는 영역이다. -->
+        <section>
+            <h2>회원 등록</h2>
+
+            <form>
+                <div>
+                    <!-- for와 id를 같게 작성해서 설명과 입력란을 연결한다. -->
+                    <label for="name">이름</label>
+                    <input id="name" name="name" type="text" required>
+                </div>
+
+                <div>
+                    <!-- 이메일 형식을 검사하며 필수 입력으로 지정한다. -->
+                    <label for="email">이메일</label>
+                    <input id="email" name="email" type="email" required>
+                </div>
+
+                <div>
+                    <!-- 나이는 선택 입력이며 1 이상의 정수로 받는다. -->
+                    <label for="age">나이</label>
+                    <input id="age" name="age" type="number" min="1" step="1">
+                </div>
+
+                <!-- 폼을 제출하는 버튼이다. -->
+                <button type="submit">회원 등록</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- 학습 과정과 챕터 정보를 표시한다. -->
+    <footer>
+        <p>Frontend Basic - Chapter 03</p>
+    </footer>
+</body>
+</html>

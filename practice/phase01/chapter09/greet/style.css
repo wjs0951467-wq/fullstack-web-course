@@ -1,0 +1,70 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #e9ecef;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* 이름 입력창과 확인 버튼 */
+#name-input, #age-input {
+    width: 35%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#greet-button {
+    padding: 10px 18px;
+    margin-left: 5px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 마우스를 버튼 위에 올렸을 때 */
+#greet-button:hover {
+    background-color: #003d80;
+}
+
+/* 입력창을 클릭했을 때 */
+#name-input:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+/* 입력창과 인사말 사이 간격 */
+#greeting-box {
+    margin-top: 20px;
+}
