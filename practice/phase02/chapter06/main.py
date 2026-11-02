@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from database import get_connection
+from common.database import get_connection
 
 app = FastAPI()
 
