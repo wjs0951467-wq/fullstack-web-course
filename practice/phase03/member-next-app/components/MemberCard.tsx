@@ -1,7 +1,7 @@
 
+import Link from "next/link";
 import type { Member } from "../types/member";
 
-// 부모 컴포넌트에서 전달받을 Props
 type MemberCardProps = {
   member: Member;
   onEdit: (member: Member) => void;
@@ -42,6 +42,12 @@ export default function MemberCard({
         나이 {member.age}세 · ID {member.member_id}
       </p>
 
+      {/* 6강: 회원 상세 페이지 링크 */}
+      <Link href={"/members/" + member.member_id}>
+        상세 보기
+      </Link>{" "}
+
+      {/* 5강: 수정 기능 유지 */}
       <button
         type="button"
         disabled={busy}
@@ -50,6 +56,7 @@ export default function MemberCard({
         수정
       </button>{" "}
 
+      {/* 5강: 삭제 기능 유지 */}
       <button
         type="button"
         disabled={busy}

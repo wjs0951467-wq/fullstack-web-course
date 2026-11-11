@@ -4,13 +4,13 @@ import type { Member } from "../types/member";
 // 실제 FastAPI 회원 API 경로
 const MEMBERS_PATH = "/members";
 
-// 등록과 수정에 필요한 데이터 타입
+// 회원 등록·수정에 사용할 타입
 export type MemberPayload = Pick<
   Member,
   "name" | "email" | "age"
 >;
 
-// API 전체 주소 만들기
+// API 전체 URL 생성
 function apiUrl(path: string): string {
   const base = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -23,7 +23,7 @@ function apiUrl(path: string): string {
   return base.replace(/\/$/, "") + path;
 }
 
-// 서버에서 받은 데이터가 Member 타입인지 확인
+// 서버 응답이 Member 형식인지 검증
 function isMember(value: unknown): value is Member {
   if (typeof value !== "object" || value === null) {
     return false;
@@ -39,8 +39,10 @@ function isMember(value: unknown): value is Member {
   );
 }
 
-// HTTP 요청 성공 여부 확인
-async function requireOk(response: Response): Promise<void> {
+// HTTP 성공 여부 확인
+async function requireOk(
+  response: Response
+): Promise<void> {
   if (!response.ok) {
     throw new Error(
       "회원 API 요청 실패: HTTP " + response.status
@@ -48,14 +50,17 @@ async function requireOk(response: Response): Promise<void> {
   }
 }
 
-// READ: 회원 목록 조회
+// READ: 회원 전체 조회
 export async function getMembers(
   signal?: AbortSignal
 ): Promise<Member[]> {
-  const response = await fetch(apiUrl(MEMBERS_PATH), {
-    cache: "no-store",
-    signal,
-  });
+  const response = await fetch(
+    apiUrl(MEMBERS_PATH),
+    {
+      cache: "no-store",
+      signal,
+    }
+  );
 
   await requireOk(response);
 
@@ -74,13 +79,16 @@ export async function getMembers(
 export async function createMember(
   body: MemberPayload
 ): Promise<void> {
-  const response = await fetch(apiUrl(MEMBERS_PATH), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  const response = await fetch(
+    apiUrl(MEMBERS_PATH),
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }
+  );
 
   await requireOk(response);
 }
@@ -117,4 +125,35 @@ export async function deleteMember(
 
   // 204 No Content도 성공으로 처리
   await requireOk(response);
+}
+
+// 6강 신규 기능: 회원 한 명 상세 조회
+export async function getMember(
+  memberId: number,
+  signal?: AbortSignal
+): Promise<Member> {
+  const detailPath =
+    MEMBERS_PATH.replace(/\/$/, "") +
+    "/" +
+    memberId;
+
+  const response = await fetch(
+    apiUrl(detailPath),
+    {
+      cache: "no-store",
+      signal,
+    }
+  );
+
+  await requireOk(response);
+
+  const data: unknown = await response.json();
+
+  if (!isMember(data)) {
+    throw new Error(
+      "회원 상세 응답이 예상한 Member 형식이 아닙니다."
+    );
+  }
+
+  return data;
 }
