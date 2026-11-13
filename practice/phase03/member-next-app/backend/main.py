@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.routers.member_router import router as member_router
 
 
-# Logging 기본 설정
+# 기본 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s %(name)s %(message)s",
@@ -24,7 +24,7 @@ app = FastAPI(
 )
 
 
-# Next.js 프론트엔드의 API 요청 허용
+# Next.js 프론트엔드 API 요청 허용
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -37,7 +37,7 @@ app.add_middleware(
 )
 
 
-# 회원 Router 등록
+# 기존 회원관리 Router 등록
 app.include_router(member_router)
 
 
